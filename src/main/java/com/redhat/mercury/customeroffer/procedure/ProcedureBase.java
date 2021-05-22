@@ -195,5 +195,14 @@ public final class ProcedureBase extends RouteBuilder {
                     .description("Filter to refine the result set. ex- CustomerOffer Instance Status='active'")
                 .endParam()
                 .to("direct:RetrieveCustomerOfferReferenceIds");
+
+        from("direct:initiateCustomerOfferProcedure").to("log:initiateCustomerOfferProcedure?level=INFO");
+        from("direct:updateCustomerOfferProcedure").to("log:updateCustomerOfferProcedure?level=INFO");
+        from("direct:controlCustomerOfferProcedureUpdate").to("log:controlCustomerOfferProcedureUpdate?level=INFO");
+        from("direct:exchangeCustomerOfferProcedureUpdate").to("log:exchangeCustomerOfferProcedureUpdate?level=INFO");
+        from("direct:executeCustomerOfferProcedureUpdate").to("log:executeCustomerOfferProcedureUpdate?level=INFO");
+        from("direct:requestCustomerOfferProcedureUpdate").to("log:requestCustomerOfferProcedureUpdate?level=INFO");
+        from("direct:retrieveCustomerOffer").to("log:retrieveCustomerOffer?level=INFO");
+        from("direct:RetrieveCustomerOfferReferenceIds").to("log:RetrieveCustomerOfferReferenceIds?level=INFO");        
     }
 }
