@@ -1,0 +1,82 @@
+package com.redhat.mercury.customeroffer.procedure;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestParamType;
+
+public final class ProductInitialization extends RouteBuilder {
+
+    public void configure() {
+
+        rest()
+           .put("/customer-offer/{sdReferenceId}/customer-offer-procedure/{crReferenceId}/productinitialization/{bqReferenceId}/update")
+                .id("updateCustomerOfferProcedureProductInitialization")
+                .description("Update details of the product initiation request")
+                .produces("application/json")
+                .param()
+                    .name("sdReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Servicing Session Reference")
+                .endParam()
+                .param()
+                    .name("crReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Procedure Instance Reference")
+                .endParam()
+                .param()
+                    .name("bqReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("ProductInitialization Instance Reference")
+                .endParam()
+                .param()
+                    .name("body")
+                    .type(RestParamType.body)
+                    .required(true)
+                    .description("ProductInitialization Request Payload")
+                .endParam()
+                .to("direct:updateCustomerOfferProcedureProductInitialization")
+            .get("/customer-offer/{sdReferenceId}/customer-offer-procedure/{crReferenceId}/productinitialization/{bqReferenceId}/")
+                .id("retrieveCustomerOfferProcedureProductInitialization")
+                .description("Retrieve details about the product initiation request .The retrieve operation can have sub qualifiers beyond BQ level, please reffer to the model heriarchy to extend beyond BQ level into APIs retrieving sub-qualifier level information.")
+                .produces("application/json")
+                .param()
+                    .name("sdReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Servicing Session Reference")
+                .endParam()
+                .param()
+                    .name("crReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Procedure Instance Reference")
+                .endParam()
+                .param()
+                    .name("bqReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("ProductInitialization Instance Reference")
+                .endParam()
+                .param()
+                    .name("queryparams")
+                    .type(RestParamType.query)
+                    .dataType("string")
+                    .required(false)
+                    .description("Query params from schema '#/definitions/BQProductInitializationRetrieveInputModel'")
+                .endParam()
+                .to("direct:retrieveCustomerOfferProcedureProductInitialization");
+            
+        from("direct:updateCustomerOfferProcedureProductInitialization")
+                .to("log:updateCustomerOfferProcedureProductInitialization?level=INFO");
+        from("direct:retrieveCustomerOfferProcedureProductInitialization")
+                .to("log:retrieveCustomerOfferProcedureProductInitialization?level=INFO");
+    }
+}

@@ -1,0 +1,80 @@
+package com.redhat.mercury.customeroffer.procedure;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestParamType;
+
+public final class Credit extends RouteBuilder {
+
+    public void configure() {
+
+        rest()
+            .put("/customer-offer/{sdReferenceId}/customer-offer-procedure/{crReferenceId}/credit/{bqReferenceId}/update")
+                .id("updateCustomerOfferProcedureCredit")
+                .description("Update credit submission details")
+                .produces("application/json")
+                .param()
+                    .name("sdReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Servicing Session Reference")
+                .endParam()
+                .param()
+                    .name("crReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Procedure Instance Reference")
+                .endParam()
+                .param()
+                    .name("bqReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Credit Instance Reference")
+                .endParam()
+                .param()
+                    .name("body")
+                    .type(RestParamType.body)
+                    .required(true)
+                    .description("Credit Request Payload")
+                .endParam()
+                .to("direct:updateCustomerOfferProcedureCredit")
+            .get("/customer-offer/{sdReferenceId}/customer-offer-procedure/{crReferenceId}/credit/{bqReferenceId}/")
+                .id("retrieveCustomerOfferProcedureCredit")
+                .description("Retrieve details about the credit submission .The retrieve operation can have sub qualifiers beyond BQ level, please reffer to the model heriarchy to extend beyond BQ level into APIs retrieving sub-qualifier level information.")
+                .produces("application/json")
+                .param()
+                    .name("sdReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Servicing Session Reference")
+                .endParam()
+                .param()
+                    .name("crReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Customer Offer Procedure Instance Reference")
+                .endParam()
+                .param()
+                    .name("bqReferenceId")
+                    .type(RestParamType.path)
+                    .dataType("string")
+                    .required(true)
+                    .description("Credit Instance Reference")
+                .endParam()
+                .param()
+                    .name("queryparams")
+                    .type(RestParamType.query)
+                    .dataType("string")
+                    .required(false)
+                    .description("Query params from schema '#/definitions/BQCreditRetrieveInputModel'")
+                .endParam()
+                .to("direct:retrieveCustomerOfferProcedureCredit");
+        
+        from("direct:updateCustomerOfferProcedureCredit").to("log:updateCustomerOfferProcedureCredit?level=INFO");
+        from("direct:retrieveCustomerOfferProcedureCredit").to("log:retrieveCustomerOfferProcedureCredit?level=INFO");
+    }
+}
