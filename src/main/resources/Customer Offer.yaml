@@ -1,0 +1,378 @@
+openapi: 3.0.0
+info:
+  title: Consumer Offer
+  version: 1.0.0
+  description: API Specification for Customer Offer Service Domain using in BIAN Coreless Project
+
+servers:
+  - url: 'tbd'
+security:
+  - oauth2schema: []
+paths:
+  /customer-offer:
+    post:
+      tags: 
+        - CR - CustomerOfferProcedure
+      summary: Initiate a new Customer Offer Procedure
+      operationId: Initiate {CustomerOfferProcedure}
+      parameters:
+        - name: Client-ID
+          in: header
+          schema:
+            $ref: '#/components/parameters/ClientID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+  
+  '/customer-offer/{offer-id}':
+    get:
+      tags:
+        - CR - CustomerOfferProcedure
+      summary: Retrieve a Customer Offer Procedure
+      operationId: Retrieve
+      parameters:
+        - name: Client-ID
+          in: header
+          schema:
+            $ref: '#/components/parameters/ClientID'
+        - name: offer-id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+  
+  '/customer-offer/{offer-id}/product':
+    get:
+      tags:
+        - BQ - Product
+      summary: Retrieve a Product
+      operationId: Retrieve Product
+      parameters:
+        - name: Client-ID
+          in: header
+          schema:
+            $ref: '#/components/parameters/ClientID'
+        - name: offer-id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveProductResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+                
+  '/customer-offer/{offer-id}/product/exchange':
+    put:
+      tags:
+        - BQ - Product
+      summary: Exchange a Product
+      operationId: Exchange Product
+      parameters:
+        - name: Client-ID
+          in: header
+          schema:
+            $ref: '#/components/parameters/ClientID'
+        - name: offer-id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExchangeProductRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeProductResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/HTTPError'
+  
+  
+components:
+  schemas:
+    InitiateRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+        partyId:
+          type: string
+        productId:
+          type: string
+        purpose:
+          title: Purpose of the requested product
+          type: string
+        requestedAmount:
+          title: Requested amount
+          type: number
+        repaymentPeriod:
+          title: Repayment period in months
+          type: integer
+          format: int32
+    
+    InitiateResponse:
+      type: object
+      properties:
+        offerId:
+          type: string
+        offerStatus:
+          type: string
+        productId:
+          type: string
+        nextStep:
+          type: string
+    
+    RetrieveResponse:
+      type: object
+      properties:
+        offerId:
+          type: string
+        offerStatus:
+          type: string
+        productId:
+          type: string
+        nextStep:
+          type: string
+    
+    RetrieveProductResponse:
+      type: object
+      properties:
+        offerId:
+          type: string
+        offerStatus:
+          type: string
+        productId:
+          type: string
+        nextStep:
+          type: string
+    
+    ExchangeProductRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+        productDetails:
+          type: string
+    
+    ExchangeProductResponse:
+      type: object
+      properties:
+        offerId:
+          type: string
+        offerStatus:
+          type: string
+        productId:
+          type: string
+        productDetails:
+          type: string
+    
+  responses:
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+  
+  parameters:
+    ClientID:
+      name: Client-ID
+      in: header
+      description: identify of the client calling the API endpoint
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    
+  requestBodies: {}
+  
+  securitySchemes:
+    oauth2schema:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: >-
+            https://keycloak.apps.ocp1-bsc.nca.ihost.com/auth/realms/fsw/protocol/openid-connect/auth
+          scopes: {}
+x-apic-name: CustomerOffer
+x-apic-apiName: customer-offer
