@@ -160,9 +160,9 @@
             <artifactId>camel-restdsl-openapi-plugin</artifactId>
             <version>3.9.0</version>
             <configuration>
-              <specificationUri>${project.basedir}/CustomerCreditRating.json</specificationUri>
-              <className>CustomerCreditRatingRoute</className>
-              <packageName>com.redhat.mercury.customecreditrating</packageName>
+              <specificationUri>${project.basedir}/src/main/resources/META-INF/resources/CustomerOffer.json</specificationUri>
+              <className>CustomerOfferRoute</className>
+              <packageName>com.redhat.mercury.customeroffer</packageName>
               <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
             </configuration>
           </plugin>
