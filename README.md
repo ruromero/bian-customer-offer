@@ -1,4 +1,28 @@
-# customer-offer project
+# Mercury project
+
+## How to generate a Camel restdsl from a given API
+
+Review the plugin configuration in the pom.xml file
+
+```xml
+    <plugin>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-restdsl-openapi-plugin</artifactId>
+      <version>3.9.0</version>
+      <configuration>
+        <specificationUri>${project.basedir}/CustomerCreditRating.json</specificationUri>
+        <className>CustomerCreditRatingRoute</className>
+        <packageName>com.redhat.mercury.customecreditrating</packageName>
+        <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+      </configuration>
+    </plugin>
+```
+
+Then run the plugin manually
+
+```bash
+mvn camel-restdsl-openapi:generate -Popenapi-dsl
+```
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

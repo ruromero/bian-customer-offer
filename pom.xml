@@ -59,10 +59,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
-    </dependency>
+    </dependency> -->
 
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -160,9 +160,9 @@
             <artifactId>camel-restdsl-openapi-plugin</artifactId>
             <version>3.9.0</version>
             <configuration>
-              <specificationUri>${project.basedir}/src/main/resources/META-INF/openapi.json</specificationUri>
-              <className>CustomerOfferRoute</className>
-              <packageName>com.redhat.mercury.customeroffer</packageName>
+              <specificationUri>${project.basedir}/CustomerCreditRating.json</specificationUri>
+              <className>CustomerCreditRatingRoute</className>
+              <packageName>com.redhat.mercury.customecreditrating</packageName>
               <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
             </configuration>
           </plugin>

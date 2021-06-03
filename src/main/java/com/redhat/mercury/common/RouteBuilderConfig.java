@@ -1,4 +1,4 @@
-package com.redhat.mercury.customeroffer;
+package com.redhat.mercury.common;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;

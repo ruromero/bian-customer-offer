@@ -91,7 +91,7 @@ applications are configured:
 apiVersion: mercury.redhat.com/v1alpha1
 kind: CustomerOffer
 metadata:
-  name: sd-co-env
+  name: sd-co-prod
 spec:
   environment: production
   auth:
